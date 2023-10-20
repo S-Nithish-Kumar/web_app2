@@ -1,11 +1,53 @@
-#terminal div {
-    color: gray;
+.flex-container-heading {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(213, 213, 213);
+  border-radius: 20px;
 }
 
-#terminal div.out {
-    color: red;
+.flex-container-top {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(213, 213, 213);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
-#terminal div.in {
-    color: blue;
+.flex-container-bottom {
+display: flex;
+justify-content: center;
+background-color: rgb(213, 213, 213);
+border-bottom-right-radius: 20px;
+border-bottom-left-radius: 20px;
+padding-bottom: 10px;
+}
+
+.flex-container-button {
+width: 140px;
+margin: 10px;
+text-align: center;
+line-height: 40px;
+font-size: 20px;
+border-radius: 20px;
+border-width: 2px;
+}
+
+.flex-container-control-button {
+background-color: #1f7fec;
+width: 120px;
+margin: 0px;
+text-align: center;
+line-height: 40px;
+font-size: 20px;
+border-radius: 20px;
+border-width: 2px;
 }
