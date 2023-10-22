@@ -56,6 +56,23 @@ subscribeData = (data) => {
       return characteristic2.readValue();
     });
 }
+
+subscribeDataFlag = (data) => {
+  data.then(server3 => {
+    log('GATT server connected, getting service...')
+    return server3?.getPrimaryService(0x4BA4);
+  }).
+    then(service3 => {
+      log('Service found, getting characteristic...');
+      return service3.getCharacteristic(0x12F7);
+    }).
+    then(characteristic3 => {
+      log('Subscription flag ON');
+      characteristicCache3 = characteristic3;
+
+      return characteristicCache3;
+    });
+}
 // subscribe
 
 // Disconnect from the device on Disconnect button click
@@ -75,8 +92,14 @@ high_alert_button.addEventListener('click', function () {
   high_alert_send();
 });
 
-subscribe_button.addEventListener('click', function(){
+subscribe_button.addEventListener('click', function() {
   subscribeData(connectionKey);
+  subscribeDataFlag(connectionKey);
+  subscribe_send();
+});
+
+unsubscribe_button.addEventListener('click', function(){
+  unsubscribe_send();
 });
 
 
@@ -126,7 +149,7 @@ function handleCharacteristicValueChanged(event, data) {
   data?.readValue()
   let myData = document.getElementById("dataFromBle")
   // log(myData)
-  myData.innerHTML = dataViewToHex(event.target.value)
+  myData.innerHTML = dataViewToDecimal(event.target.value)
   // log(dataViewToHex(event.target.value), 'in');
 }
 
@@ -139,6 +162,18 @@ function dataViewToHex(dataView) {
   }
   return hex.toUpperCase(); // Optionally convert to uppercase
 }
+
+function dataViewToDecimal(dataView) {
+  let decimal = 0;
+  let factor = 1;
+  for (let i = dataView.byteLength - 1; i >= 0; i--) {
+    const byte = dataView.getUint8(i);
+    decimal += byte * factor;
+    factor *= 256; // Multiply by 256 for each byte (2^8)
+  }
+  return decimal;
+}
+
 
 function handleDisconnection(event) {
   let device = event.target;
@@ -194,4 +229,15 @@ function mild_alert_send() {
 function high_alert_send() {
   const resetEnergyExpended = Uint8Array.of(2);
   writeToCharacteristic(characteristicCache, resetEnergyExpended);
+}
+
+function subscribe_send() {
+  const resetEnergyExpended = Uint8Array.of(1);
+  writeToCharacteristic(characteristicCache3, resetEnergyExpended);
+}
+
+function unsubscribe_send() {
+  const resetEnergyExpended = Uint8Array.of(0);
+  writeToCharacteristic(characteristicCache3, resetEnergyExpended);
+  log('Subscription flag OFF');
 }
