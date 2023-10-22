@@ -66,10 +66,10 @@ padding-top: 20px;
 padding-bottom: 20px;
 }
 
-@media (max-width: 350px) {
+@media (max-width: 800px) {
   .flex-container-bottom-control {
     flex-direction: column;
-    justify-content: center;
+    justify-content: stretch;
     align-items: center;
   }
 }
