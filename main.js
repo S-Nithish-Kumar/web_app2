@@ -20,6 +20,8 @@ connectButton.addEventListener('click', function () {
   connectionKey = connect()
   // switch
   afterConnection(connectionKey)
+  subscribeData(connectionKey);
+  subscribeDataFlag(connectionKey);
 });
 // data
 afterConnection = (data) => {
@@ -97,8 +99,6 @@ high_alert_button.addEventListener('click', function () {
 });
 
 subscribe_button.addEventListener('click', function() {
-  subscribeData(connectionKey);
-  subscribeDataFlag(connectionKey);
   subscribe_send();
 });
 
