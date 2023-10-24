@@ -205,6 +205,8 @@ function disconnect() {
   }
 
   characteristicCache = null;
+  characteristicCache2 = null;
+  characteristicCache3 = null;
   deviceCache = null;
 }
 
