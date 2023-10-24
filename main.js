@@ -9,6 +9,12 @@ let high_alert_button = document.getElementById('high_alert');
 let subscribe_button = document.getElementById('subscribe');
 let unsubscribe_button = document.getElementById('unsubscribe');
 let connectionKey = null
+
+// Characteristic object cache
+let characteristicCache = null;
+let characteristicCache2 = null;
+let characteristicCache3 = null;
+
 // Connect to the device on Connect button click
 connectButton.addEventListener('click', function () {
   connectionKey = connect()
@@ -48,7 +54,6 @@ subscribeData = (data) => {
       log('Characteristic found');
       log('"' + deviceCache.name + '" bluetooth device connected');
       characteristicCache2 = characteristic2;
-
       return characteristicCache2;
     }).
     then(characteristic2 => {
@@ -69,7 +74,6 @@ subscribeDataFlag = (data) => {
     then(characteristic3 => {
       log('Subscription flag ON');
       characteristicCache3 = characteristic3;
-
       return characteristicCache3;
     });
 }
@@ -128,8 +132,6 @@ function requestBluetoothDevice() {
     });
 }
 
-// Characteristic object cache
-let characteristicCache = null;
 
 // Connect to the device specified, get service and characteristic
 function connectDeviceAndCacheCharacteristic(device) {
