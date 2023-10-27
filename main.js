@@ -22,7 +22,6 @@ connectButton.addEventListener('click', function () {
   afterConnection(connectionKey)
   subscribeData(connectionKey);
   subscribeDataFlag(connectionKey);
-  subscribe_send();
 });
 // data
 afterConnection = (data) => {
@@ -67,7 +66,7 @@ subscribeData = (data) => {
 
 subscribeDataFlag = (data) => {
   data.then(server3 => {
-    log('GATT server connected, getting service...')
+    log('GATT server connected, getting service...');
     return server3?.getPrimaryService(0x4BA4);
   }).
     then(service3 => {
@@ -216,7 +215,7 @@ function log(data) {
 }
 
 function writeToCharacteristic(characteristic, resetEnergyExpended) {
-  //log(resetEnergyExpended);
+  log(resetEnergyExpended);
   characteristic.writeValue(resetEnergyExpended);
 }
 
