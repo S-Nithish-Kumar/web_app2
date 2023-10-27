@@ -124,7 +124,7 @@ function requestBluetoothDevice() {
     filters: [{
       name: 'Custom_LED_Service'
     }],
-    optionalServices: ['00004ba4-0000-1000-8000-00805f9b34fb'] // Required to access service later.
+    Services: ['00004ba4-0000-1000-8000-00805f9b34fb'] // Required to access service later.
   }).
     then(device => {
       log('"' + device.name + '" bluetooth device selected');
