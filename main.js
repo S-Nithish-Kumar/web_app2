@@ -22,6 +22,7 @@ connectButton.addEventListener('click', function () {
   afterConnection(connectionKey)
   subscribeData(connectionKey);
   subscribeDataFlag(connectionKey);
+  subscribe_send();
 });
 // data
 afterConnection = (data) => {
