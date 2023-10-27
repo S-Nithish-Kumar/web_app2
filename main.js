@@ -220,28 +220,28 @@ function writeToCharacteristic(characteristic, resetEnergyExpended) {
 }
 
 function no_alert_send() {
-  const resetEnergyExpended = Uint8Array.of(0);
+  let resetEnergyExpended = Uint8Array.of(0);
   writeToCharacteristic(characteristicCache, resetEnergyExpended);
 }
 
 function mild_alert_send() {
-  const resetEnergyExpended = Uint8Array.of(1);
+  let resetEnergyExpended = Uint8Array.of(1);
   writeToCharacteristic(characteristicCache, resetEnergyExpended);
 }
 
 function high_alert_send() {
-  const resetEnergyExpended = Uint8Array.of(2);
+  let resetEnergyExpended = Uint8Array.of(2);
   writeToCharacteristic(characteristicCache, resetEnergyExpended);
 }
 
 function subscribe_send() {
-  const resetEnergyExpended = Uint8Array.of(1);
+  let resetEnergyExpended = Uint8Array.of(1);
   writeToCharacteristic(characteristicCache3, resetEnergyExpended);
   log('Subscription flag ON');
 }
 
 function unsubscribe_send() {
-  const resetEnergyExpended = Uint8Array.of(0);
+  let resetEnergyExpended = Uint8Array.of(0);
   writeToCharacteristic(characteristicCache3, resetEnergyExpended);
   log('Subscription flag OFF');
 }
