@@ -59,6 +59,7 @@ subscribeData = (data) => {
       return characteristicCache2;
     }).
     then(characteristic2 => {
+      log('Subscription flag ON');
       characteristic2.addEventListener('characteristicvaluechanged', (e) => { handleCharacteristicValueChanged(e, characteristic2) });
       return characteristic2.readValue();
     });
@@ -74,7 +75,6 @@ subscribeDataFlag = (data) => {
       return service3.getCharacteristic(0x12F7);
     }).
     then(characteristic3 => {
-      log('Subscription flag ON');
       characteristicCache3 = characteristic3;
       return characteristicCache3;
     });
