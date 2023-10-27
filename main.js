@@ -59,7 +59,6 @@ subscribeData = (data) => {
       return characteristicCache2;
     }).
     then(characteristic2 => {
-      log('Subscription flag ON');
       characteristic2.addEventListener('characteristicvaluechanged', (e) => { handleCharacteristicValueChanged(e, characteristic2) });
       return characteristic2.readValue();
     });
@@ -238,6 +237,7 @@ function high_alert_send() {
 function subscribe_send() {
   const resetEnergyExpended = Uint8Array.of(1);
   writeToCharacteristic(characteristicCache3, resetEnergyExpended);
+  log('Subscription flag ON');
 }
 
 function unsubscribe_send() {
