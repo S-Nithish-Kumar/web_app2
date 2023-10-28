@@ -40,7 +40,7 @@ connectButton.addEventListener('click', async function () {
   await subscribeDataFlag(connectionKey);
   await FormData(connectionKey);
   console.log("completed connecting");
-  connectFlag()
+  // connectFlag()
 });
 // data
 afterConnection = (data) => {
@@ -253,6 +253,8 @@ function log(data) {
 
 function writeToCharacteristic(characteristic, resetEnergyExpended) {
   log(resetEnergyExpended);
+  console.log("checking subscribe characteristic", characteristicCache3)
+  console.log("Inside write to characteristic", characteristic)
   characteristic.writeValue(resetEnergyExpended);
 }
 
