@@ -26,13 +26,13 @@ sendForm.addEventListener('submit', function(event) {
 });
 
 // Connect to the device on Connect button click
-connectButton.addEventListener('click', function () {
+connectButton.addEventListener('click', async function () {
   connectionKey = connect()
   // switch
-  afterConnection(connectionKey)
-  subscribeData(connectionKey);
-  subscribeDataFlag(connectionKey);
-  FormData(connectionKey);
+  await afterConnection(connectionKey)
+  await subscribeData(connectionKey);
+  await subscribeDataFlag(connectionKey);
+  await FormData(connectionKey);
 });
 // data
 afterConnection = (data) => {
