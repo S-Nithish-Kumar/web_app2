@@ -2,18 +2,28 @@
 let connectButton = document.getElementById('connect');
 let disconnectButton = document.getElementById('disconnect');
 let terminalContainer = document.getElementById('terminal');
-let inputField = document.getElementById('input');
 let no_alert_button = document.getElementById('no_alert');
 let mild_alert_button = document.getElementById('mild_alert');
 let high_alert_button = document.getElementById('high_alert');
 let subscribe_button = document.getElementById('subscribe');
 let unsubscribe_button = document.getElementById('unsubscribe');
+let sendForm = document.getElementById('send-form');
+let inputField = document.getElementById('input');
 let connectionKey = null
 
 // Characteristic object cache
 let characteristicCache = null;
 let characteristicCache2 = null;
 let characteristicCache3 = null;
+let characteristicCache4 = null;
+
+// Handle form submit event
+sendForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form sending
+  send(inputField.value); // Send text field contents
+  inputField.value = '';  // Zero text field
+  inputField.focus();     // Focus on text field
+});
 
 // Connect to the device on Connect button click
 connectButton.addEventListener('click', function () {
@@ -22,6 +32,7 @@ connectButton.addEventListener('click', function () {
   afterConnection(connectionKey)
   subscribeData(connectionKey);
   subscribeDataFlag(connectionKey);
+  FormData(connectionKey);
 });
 // data
 afterConnection = (data) => {
@@ -79,6 +90,21 @@ subscribeDataFlag = (data) => {
     });
 }
 // subscribe
+
+FormData = (data) => {
+  data.then(server4 => {
+    log('GATT server connected, getting service...');
+    return server4?.getPrimaryService(0x4BA4);
+  }).
+    then(service4 => {
+      log('Service found, getting characteristic...');
+      return service4.getCharacteristic(0x507F);
+    }).
+    then(characteristic4 => {
+      characteristicCache4 = characteristic4;
+      return characteristicCache4;
+    });
+}
 
 // Disconnect from the device on Disconnect button click
 disconnectButton.addEventListener('click', function () {
@@ -208,6 +234,7 @@ function disconnect() {
   characteristicCache = null;
   characteristicCache2 = null;
   characteristicCache3 = null;
+  characteristicCache4 = null;
   deviceCache = null;
 }
 
@@ -219,6 +246,11 @@ function log(data) {
 function writeToCharacteristic(characteristic, resetEnergyExpended) {
   log(resetEnergyExpended);
   characteristic.writeValue(resetEnergyExpended);
+}
+
+function writeToCharacteristicString(characteristic, data) {
+  log(data);
+  characteristic.writeValue(new TextEncoder().encode(data));
 }
 
 function no_alert_send() {
@@ -246,4 +278,15 @@ function unsubscribe_send() {
   let resetEnergyExpended = Uint8Array.of(0);
   writeToCharacteristic(characteristicCache3, resetEnergyExpended);
   log('Subscription flag OFF');
+}
+
+function send(data) {
+  data = String(data);
+
+  if (!data || !characteristicCache4) {
+    return;
+  }
+
+  writeToCharacteristicString(characteristicCache4, data);
+  log(data, 'out');
 }

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    padding: 20px;
+    padding: 5px;
   }
 
 .flex-container {
@@ -35,6 +35,7 @@ padding-bottom: 10px;
 .flex-container-bottom-control {
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: rgb(213, 213, 213);
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -69,7 +70,13 @@ padding-bottom: 20px;
 @media (max-width: 1200px) {
   .flex-container-bottom-control {
     flex-direction: column;
-    justify-content: stretch;
+    justify-content: center;
     align-items: center;
   }
+}
+
+.form {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
