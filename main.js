@@ -16,9 +16,15 @@ let characteristicCache = null;
 let characteristicCache2 = null;
 let characteristicCache3 = null;
 let characteristicCache4 = null;
+let connectFlag = () => {
+  buttons = document.getElementsByTagName("Button")
+  for (item of buttons) {
+    item.disabled = false
+  }
+}
 
 // Handle form submit event
-sendForm.addEventListener('submit', function(event) {
+sendForm.addEventListener('submit', function (event) {
   event.preventDefault(); // Prevent form sending
   send(inputField.value); // Send text field contents
   inputField.value = '';  // Zero text field
@@ -33,6 +39,8 @@ connectButton.addEventListener('click', async function () {
   await subscribeData(connectionKey);
   await subscribeDataFlag(connectionKey);
   await FormData(connectionKey);
+  console.log("completed connecting");
+  connectFlag()
 });
 // data
 afterConnection = (data) => {
@@ -123,11 +131,11 @@ high_alert_button.addEventListener('click', function () {
   high_alert_send();
 });
 
-subscribe_button.addEventListener('click', function() {
+subscribe_button.addEventListener('click', function () {
   subscribe_send();
 });
 
-unsubscribe_button.addEventListener('click', function(){
+unsubscribe_button.addEventListener('click', function () {
   unsubscribe_send();
 });
 
