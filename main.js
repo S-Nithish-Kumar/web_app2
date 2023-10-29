@@ -255,12 +255,12 @@ function writeToCharacteristic(characteristic, resetEnergyExpended) {
   log(resetEnergyExpended);
   console.log("checking subscribe characteristic", characteristicCache3)
   console.log("Inside write to characteristic", characteristic)
-  characteristic.writeValue(resetEnergyExpended);
+  characteristic.writeValueWithoutResponse(resetEnergyExpended);
 }
 
 function writeToCharacteristicString(characteristic, data) {
   log(data);
-  characteristic.writeValue(new TextEncoder().encode(data));
+  characteristic.writeValueWithoutResponse(new TextEncoder().encode(data));
 }
 
 function no_alert_send() {
