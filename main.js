@@ -155,9 +155,10 @@ function requestBluetoothDevice() {
   log('Requesting bluetooth device...');
 
   return navigator.bluetooth.requestDevice({
-    filters: [{
-      name: 'Custom_LED_Service'
-    }],
+    //filters: [{
+    //  name: 'Custom_LED_Service'
+    //}],
+    acceptAllDevices: true,
     optionalServices: ['00004ba4-0000-1000-8000-00805f9b34fb'] // Required to access service later.
   }).
     then(device => {
@@ -255,7 +256,7 @@ function writeToCharacteristic(characteristic, resetEnergyExpended) {
   log(resetEnergyExpended);
   console.log("checking subscribe characteristic", characteristicCache3)
   console.log("Inside write to characteristic", characteristic)
-  characteristic.writeValueWithoutResponse(resetEnergyExpended);
+  characteristic.writeValueWithoutResponse(new TextEncoder().encode(resetEnergyExpended));
 }
 
 function writeToCharacteristicString(characteristic, data) {
@@ -279,14 +280,16 @@ function high_alert_send() {
 }
 
 function subscribe_send() {
-  let resetEnergyExpended = Uint8Array.of(1);
-  writeToCharacteristic(characteristicCache3, resetEnergyExpended);
+  //let resetEnergyExpended = Uint8Array.of(1);
+  data = String(10);
+  writeToCharacteristic(characteristicCache3, data);
   log('Subscription flag ON');
 }
 
 function unsubscribe_send() {
-  let resetEnergyExpended = Uint8Array.of(0);
-  writeToCharacteristic(characteristicCache3, resetEnergyExpended);
+  //let resetEnergyExpended = Uint8Array.of(0);
+  data = String(20);
+  writeToCharacteristic(characteristicCache3, data);
   log('Subscription flag OFF');
 }
 
