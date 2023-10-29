@@ -265,30 +265,33 @@ function writeToCharacteristicString(characteristic, data) {
 }
 
 function no_alert_send() {
-  let resetEnergyExpended = Uint8Array.of(0);
-  writeToCharacteristic(characteristicCache, resetEnergyExpended);
+  //let resetEnergyExpended = Uint8Array.of(0);
+  data = String(0);
+  writeToCharacteristic(characteristicCache, data);
 }
 
 function mild_alert_send() {
-  let resetEnergyExpended = Uint8Array.of(1);
-  writeToCharacteristic(characteristicCache, resetEnergyExpended);
+  //let resetEnergyExpended = Uint8Array.of(1);
+  data = String(1);
+  writeToCharacteristic(characteristicCache, data);
 }
 
 function high_alert_send() {
-  let resetEnergyExpended = Uint8Array.of(2);
-  writeToCharacteristic(characteristicCache, resetEnergyExpended);
+  //let resetEnergyExpended = Uint8Array.of(2);
+  data = String(2);
+  writeToCharacteristic(characteristicCache, data);
 }
 
 function subscribe_send() {
   //let resetEnergyExpended = Uint8Array.of(1);
-  data = String(10);
+  data = String(1);
   writeToCharacteristic(characteristicCache3, data);
   log('Subscription flag ON');
 }
 
 function unsubscribe_send() {
   //let resetEnergyExpended = Uint8Array.of(0);
-  data = String(20);
+  data = String(0);
   writeToCharacteristic(characteristicCache3, data);
   log('Subscription flag OFF');
 }
